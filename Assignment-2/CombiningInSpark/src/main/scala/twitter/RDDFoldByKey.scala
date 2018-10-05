@@ -4,7 +4,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.log4j.LogManager
 
-object RDDGroupByKey {
+object RDDFoldByKey {
 
   def main(args: Array[String]) {
     val logger: org.apache.log4j.Logger = LogManager.getRootLogger
@@ -18,7 +18,7 @@ object RDDGroupByKey {
     // Intializing the app and setting the app name
     val conf = new SparkConf().setAppName("Twitter Followers Count")
 
-//    conf.set("spark.eventLog.enabled","true")
+    //    conf.set("spark.eventLog.enabled","true")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)
@@ -46,10 +46,10 @@ object RDDGroupByKey {
     // Joining two RDD, then reducing it based on key
     val unionRDD = sc.union(RDDSeq)
 
-    val bigRDD = unionRDD.groupByKey()
+    val bigRDD = unionRDD.foldByKey(0)(_ + _)
 
     // Coalesce all partitions into one and then saving it to file in desired format.
-    bigRDD.coalesce(1, true).saveAsTextFile(args(2))
+    bigRDD.saveAsTextFile(args(2))
 
     logger.info("Lineage Info:\n" + bigRDD.toDebugString)
   }
