@@ -60,7 +60,7 @@ object DSET {
 
     val edgesFile = sparkSession.read.schema(edgeSchema).csv(args(1)).as[TwitterEdge]
 
-    edgesFile.show(5)
+   // edgesFile.show(5)
 
     //Creating Pair Dataset from edges file
 
@@ -70,14 +70,14 @@ object DSET {
     val nodesCount = nodesFile.map(word => (word.followerID, 0))
 
 
-    // Joining two Dataset, then reducing it based on key
-//    val unionDataset = edgesCount.join(nodesCount)
+     //Joining two Dataset, then reducing it based on key
+    val unionDataset = edgesCount.union(nodesCount)
 
 //    edgesCount.show(5)
 
-    val finalDataset = edgesCount.groupBy("_1").count()
+    val finalDataset = unionDataset.groupBy("_1").count()
 
-    finalDataset.show(5)
+   // finalDataset.show(5)
 
 
     finalDataset.coalesce(1).write.csv(args(2))
