@@ -55,12 +55,21 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
             // Parsing on comma
             final String[] row = value.toString().split(",");
 
-            followerIdFrom.set(Integer.parseInt(row[0]));
+            Integer toNode = Integer.parseInt(row[1]);
+            Integer fromNode = Integer.parseInt(row[0]);
+            Integer MAX = context.getConfiguration().getInt("MAX" , Integer.MAX_VALUE);
 
 
-            tupleFrom.set("FROM," + row[1]);
+            if(toNode < MAX && fromNode < MAX) {
 
-            context.write(followerIdFrom, tupleFrom);
+                followerIdFrom.set(fromNode);
+
+
+                tupleFrom.set("FROM," + toNode);
+
+                context.write(followerIdFrom, tupleFrom);
+
+            }
 
         }
     }
@@ -116,6 +125,8 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
 
         // Setting the delimeter for the output
         jobConf.set("mapreduce.output.textoutputformat.separator", ",");
+        jobConf.setInt("MAX", Integer.parseInt(args[3]));
+
 
         // Delete output directory, only to ease local development; will not work on AWS. ===========
 //		final FileSystem fileSystem = FileSystem.get(conf);
@@ -153,8 +164,8 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
 
     public static void main(final String[] args) {
         // Checking whether 3 arguments are passed or not
-        if (args.length != 3) {
-            throw new Error("Two arguments required:\n<input-node-dir> <input-edges-directory> <output-dir>");
+        if (args.length != 4) {
+            throw new Error("Four arguments required:\n<input-node-dir> <input-edges-directory> <output-dir> <MAX-Value>");
         }
 
         try {

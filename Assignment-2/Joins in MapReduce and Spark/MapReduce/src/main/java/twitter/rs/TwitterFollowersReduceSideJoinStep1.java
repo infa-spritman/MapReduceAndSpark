@@ -32,16 +32,24 @@ public class TwitterFollowersReduceSideJoinStep1 extends Configured implements T
         @Override
         public void map(final Object key, final Text value, final Context context) throws IOException, InterruptedException {
             // Parsing on comma
+
             final String[] row = value.toString().split(",");
 
-            followerIdTo.set(Integer.parseInt(row[1]));
-            followerIdFrom.set(Integer.parseInt(row[0]));
+            Integer toNode = Integer.parseInt(row[1]);
+            Integer fromNode = Integer.parseInt(row[0]);
+            Integer MAX = context.getConfiguration().getInt("MAX" , Integer.MAX_VALUE);
 
-            tupleTo.set("TO," + row[0] + "," + row[1]);
-            tupleFrom.set("FROM," + row[0] + "," + row[1]);
+            if(toNode < MAX && fromNode < MAX) {
 
-            context.write(followerIdTo, tupleTo);
-            context.write(followerIdFrom, tupleFrom);
+                followerIdTo.set(toNode);
+                followerIdFrom.set(fromNode);
+
+                tupleTo.set("TO," + row[0] + "," + row[1]);
+                tupleFrom.set("FROM," + row[0] + "," + row[1]);
+
+                context.write(followerIdTo, tupleTo);
+                context.write(followerIdFrom, tupleFrom);
+            }
 
         }
     }
@@ -95,6 +103,7 @@ public class TwitterFollowersReduceSideJoinStep1 extends Configured implements T
 
         // Setting the delimeter for the output
         jobConf.set("mapreduce.output.textoutputformat.separator", ",");
+        jobConf.setInt("MAX", Integer.parseInt(args[3]));
 
         // Delete output directory, only to ease local development; will not work on AWS. ===========
 //		final FileSystem fileSystem = FileSystem.get(conf);
@@ -123,8 +132,8 @@ public class TwitterFollowersReduceSideJoinStep1 extends Configured implements T
 
     public static void main(final String[] args) {
         // Checking whether 3 arguments are passed or not
-        if (args.length != 3) {
-            throw new Error("Two arguments required:\n<input-node-dir> <input-edges-directory> <output-dir>");
+        if (args.length != 4) {
+            throw new Error("Four arguments required:\n<input-node-dir> <input-edges-directory> <output-dir> <MAX-Value>");
         }
 
         try {
