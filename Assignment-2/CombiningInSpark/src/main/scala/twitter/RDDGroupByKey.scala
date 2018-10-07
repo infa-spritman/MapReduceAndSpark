@@ -46,7 +46,7 @@ object RDDGroupByKey {
     // Joining two RDD, then reducing it based on key
     val unionRDD = sc.union(RDDSeq)
 
-    val bigRDD = unionRDD.groupByKey()
+    val bigRDD = unionRDD.groupByKey().map(tuple => (tuple._1, tuple._2.sum))
 
     // Coalesce all partitions into one and then saving it to file in desired format.
     bigRDD.coalesce(1, true).saveAsTextFile(args(2))
