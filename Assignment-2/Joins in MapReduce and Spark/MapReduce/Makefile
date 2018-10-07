@@ -5,7 +5,7 @@
 hadoop.root=/usr/local/hadoop
 jar.name=twitter-mr-1.0.jar
 jar.path=target/${jar.name}
-job.name=twitter.TwitterFollowersReduceSideJoinStep1
+job.name=twitter.rs.TwitterFollowersReduceSideJoinStep2
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges_test
 local.output=output
