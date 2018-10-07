@@ -38,7 +38,6 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
 
             followerIdTo.set(Integer.parseInt(row[1]));
 
-
             tupleTo.set("TO," + row[0]);
 
             context.write(followerIdTo, tupleTo);
@@ -59,11 +58,9 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
             Integer fromNode = Integer.parseInt(row[0]);
             Integer MAX = context.getConfiguration().getInt("MAX" , Integer.MAX_VALUE);
 
-
             if(toNode < MAX && fromNode < MAX) {
 
                 followerIdFrom.set(fromNode);
-
 
                 tupleFrom.set("FROM," + toNode);
 

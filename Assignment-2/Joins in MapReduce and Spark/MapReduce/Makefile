@@ -5,11 +5,11 @@
 hadoop.root=/usr/local/hadoop
 jar.name=twitter-mr-1.0.jar
 jar.path=target/${jar.name}
-job.name=twitter.rs.TwitterFollowersReduceSideJoinStep2
+job.name=twitter.rep.TwitterFollowersReplicatedJoin
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges_test
 local.input.two.length.path=input/Twitter-dataset/path2
-local.input.max.node=4
+local.input.max.node=10
 local.output=output
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
@@ -48,7 +48,7 @@ copy-local-path2:
 # Make sure Hadoop  is set up (in /etc/hadoop files) for standalone operation (not pseudo-cluster).
 # https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation
 local: jar clean-local-output
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output}
+	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output} ${local.input.max.node}
 
 local-rs-step1: jar clean-local-output clean-local-path2
 	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output} ${local.input.max.node}
