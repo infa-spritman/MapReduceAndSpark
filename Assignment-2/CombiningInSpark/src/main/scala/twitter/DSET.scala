@@ -21,7 +21,7 @@ object DSET {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Twitter Followers Count")
+    val conf = new SparkConf().setAppName("Twitter Followers Count DSET")
 
     //    conf.set("spark.eventLog.enabled","true")
 
@@ -49,8 +49,6 @@ object DSET {
 
     val nodesFile = sparkSession.read.schema(nodeSchema).csv(args(0)).as[TwitterNode]
 
-    nodesFile.show(5)
-
     val edgeSchemaString = "followerID followedID"
 
     val edgeFields = edgeSchemaString.split(" ")
@@ -60,9 +58,7 @@ object DSET {
 
     val edgesFile = sparkSession.read.schema(edgeSchema).csv(args(1)).as[TwitterEdge]
 
-   // edgesFile.show(5)
 
-    //Creating Pair Dataset from edges file
 
     // Transforming  Dataset to make tuples which will reduced eventually
     val edgesCount = edgesFile.map(line => (line.followedID, 1))
@@ -73,12 +69,7 @@ object DSET {
      //Joining two Dataset, then reducing it based on key
     val unionDataset = edgesCount.union(nodesCount)
 
-//    edgesCount.show(5)
-
     val finalDataset = unionDataset.groupBy("_1").count()
-
-   // finalDataset.show(5)
-
 
     finalDataset.coalesce(1).write.csv(args(2))
 

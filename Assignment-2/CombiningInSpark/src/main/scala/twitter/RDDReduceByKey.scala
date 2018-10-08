@@ -4,7 +4,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.log4j.LogManager
 
-object TwitterFollowersCountMain {
+object RDDReduceByKey {
 
   def main(args: Array[String]) {
     val logger: org.apache.log4j.Logger = LogManager.getRootLogger
@@ -16,7 +16,7 @@ object TwitterFollowersCountMain {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Twitter Followers Count")
+    val conf = new SparkConf().setAppName("Twitter Followers Count RDD-R")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)

@@ -4,7 +4,7 @@
 # -----------------------------------------------------------
 spark.root=/usr/local/spark
 hadoop.root=/usr/local/hadoop
-app.name=Twitter Followers Count
+app.name=Twitter Followers Count RDDReduceByKey
 jar.name=twitter-spark.jar
 maven.jar.name=twitter-spark-1.0.jar
 job.name=twitter.DSET
