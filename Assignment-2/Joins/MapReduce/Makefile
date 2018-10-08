@@ -5,11 +5,11 @@
 hadoop.root=/usr/local/hadoop
 jar.name=twitter-mr-1.0.jar
 jar.path=target/${jar.name}
-job.name=twitter.rs.TwitterFollowersReduceSideJoinStep2
+job.name=twitter.rep.TwitterFollowersReplicatedJoin
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges
 local.input.two.length.path=input/Twitter-dataset/path2
-local.input.max.node=1000
+local.input.max.node=50000
 local.output=output
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
@@ -23,9 +23,9 @@ aws.bucket.name=kodefear-ass1
 aws.subnet.id=subnet-fd0f899a
 aws.input.nodes=nodes
 aws.input.edges=edges
-aws.output=output/MR-C2R2
-aws.log.dir=log
-aws.num.nodes=10
+aws.output=output/Assignment/Rep-MAX-50000-C1
+aws.log.dir=log/Assignment-2
+aws.num.nodes=5
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 
@@ -133,12 +133,12 @@ upload-app-aws:
 # Main EMR launch.
 aws: jar
 	aws emr create-cluster \
-		--name "Twitter MR Cluster C2R2" \
+		--name "Twitter MR Cluster Rep-MAX-50000-C1" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop \
 	    --ec2-attributes SubnetId=${aws.subnet.id} \
-	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/input/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
+	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/input/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}","${local.input.max.node}"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \

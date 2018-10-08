@@ -111,7 +111,7 @@ public class TwitterFollowersReplicatedJoin extends Configured implements Tool {
         public void setup(Context context) throws IOException,
                 InterruptedException {
             try {
-                Path[] files = context.getLocalCacheFiles();
+                URI[] files = context.getCacheFiles();
 
                 if (files == null || files.length == 0) {
                     throw new RuntimeException(
@@ -119,12 +119,12 @@ public class TwitterFollowersReplicatedJoin extends Configured implements Tool {
                 }
 
                 // Read all files in the DistributedCache
-                for (Path p : files) {
-                    System.out.println("Path:" + p);
-                    FileSystem fs = FileSystem.get(context.getConfiguration());
+                for (URI p : files) {
+//                    System.out.println("Path:" + p);
+                    FileSystem fs = FileSystem.get(p, context.getConfiguration());
 
                     BufferedReader rdr = new BufferedReader(
-                            new InputStreamReader(fs.open(p)));
+                            new InputStreamReader(fs.open(new Path(p))));
 
                     String line;
                     // For each record in the user file
@@ -190,30 +190,4 @@ public class TwitterFollowersReplicatedJoin extends Configured implements Tool {
 
     }
 
-//    public static void main(String[] args) throws Exception {
-//        Configuration conf = new Configuration();
-//        String[] otherArgs = new GenericOptionsParser(conf, args)
-//                .getRemainingArgs();
-//        if (otherArgs.length != 4) {
-//            System.err
-//                    .println("Usage: ReplicatedJoin <user data> <comment data> <out> [inner|leftouter]");
-//            System.exit(1);
-//        }
-//
-//        String joinType = otherArgs[3];
-//        if (!(joinType.equalsIgnoreCase("inner") || joinType
-//                .equalsIgnoreCase("leftouter"))) {
-//            System.err.println("Join type not set to inner or leftouter");
-//            System.exit(2);
-//        }
-//
-//        // Configure the join type
-
-//
-//        TextInputFormat.setInputPaths(job, new Path(otherArgs[1]));
-//        TextOutputFormat.setOutputPath(job, new Path(otherArgs[2]));
-//
-
-//        System.exit(job.waitForCompletion(true) ? 0 : 3);
-//    }
 }
