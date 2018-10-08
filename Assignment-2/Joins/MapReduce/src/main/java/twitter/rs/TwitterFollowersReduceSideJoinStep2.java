@@ -36,12 +36,14 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
             // Parsing on comma
             final String[] row = value.toString().split(",");
 
-            followerIdTo.set(Integer.parseInt(row[1]));
+            if(row.length == 2) {
 
-            tupleTo.set("TO," + row[0]);
+                followerIdTo.set(Integer.parseInt(row[1]));
 
-            context.write(followerIdTo, tupleTo);
+                tupleTo.set("TO," + row[0]);
 
+                context.write(followerIdTo, tupleTo);
+            }
         }
     }
 
@@ -58,7 +60,7 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
             Integer fromNode = Integer.parseInt(row[0]);
             Integer MAX = context.getConfiguration().getInt("MAX" , Integer.MAX_VALUE);
 
-            if(toNode < MAX && fromNode < MAX) {
+            if(toNode < MAX && fromNode < MAX && row.length==2) {
 
                 followerIdFrom.set(fromNode);
 
@@ -100,7 +102,7 @@ public class TwitterFollowersReduceSideJoinStep2 extends Configured implements T
             if (!listLeft.isEmpty() && !listRight.isEmpty()) {
                 for (Integer left : listLeft) {
                     for (Integer right : listRight) {
-                        if(left.equals(right))
+                        if(left.intValue() == right.intValue())
                             context.getCounter(TriangleCounter.count).increment(1);
                     }
                 }

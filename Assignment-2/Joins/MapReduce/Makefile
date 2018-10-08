@@ -7,9 +7,9 @@ jar.name=twitter-mr-1.0.jar
 jar.path=target/${jar.name}
 job.name=twitter.rep.TwitterFollowersReplicatedJoin
 local.input.nodes=input/Twitter-dataset/nodes
-local.input.edges=input/Twitter-dataset/edges_test
+local.input.edges=input/Twitter-dataset/edges
 local.input.two.length.path=input/Twitter-dataset/path2
-local.input.max.node=10
+local.input.max.node=1000
 local.output=output
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
