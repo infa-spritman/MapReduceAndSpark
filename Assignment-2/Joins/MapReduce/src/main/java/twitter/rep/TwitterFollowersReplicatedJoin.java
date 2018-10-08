@@ -53,7 +53,7 @@ public class TwitterFollowersReplicatedJoin extends Configured implements Tool {
         public void setup(Context context) throws IOException,
                 InterruptedException {
             try {
-                URI[] files = context.getCacheFiles();
+                Path[] files = context.getLocalCacheFiles();
 
                 if (files == null || files.length == 0) {
                     throw new RuntimeException(
@@ -61,12 +61,12 @@ public class TwitterFollowersReplicatedJoin extends Configured implements Tool {
                 }
 
                 // Read all files in the DistributedCache
-                for (URI p : files) {
+                for (Path p : files) {
                     System.out.println("Path:" + p);
-                    FileSystem fs = FileSystem.get(p, context.getConfiguration());
+                    FileSystem fs = FileSystem.get(context.getConfiguration());
 
                     BufferedReader rdr = new BufferedReader(
-                            new InputStreamReader(fs.open(new Path(p))));
+                            new InputStreamReader(fs.open(p)));
 
                     String line;
                     // For each record in the user file

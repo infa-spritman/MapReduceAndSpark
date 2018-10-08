@@ -10,9 +10,9 @@ maven.jar.name=twitter-spark-1.0.jar
 job.name=twitter.dataset.RSdataset
 local.master=local[4]
 local.input.nodes=input/Twitter-dataset/nodes
-local.input.edges=input/Twitter-dataset/edges_test
+local.input.edges=input/Twitter-dataset/edges
 local.output=output
-local.max=10
+local.max=1000
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
 hdfs.input.nodes=nodes
