@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c38200a-6396-407e-ab21-fabe60477593" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/pseudo/core-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/pseudo/hdfs-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/pseudo/mapred-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/pseudo/yarn-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/standalone/core-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/standalone/hdfs-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/standalone/mapred-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/config/standalone/yarn-site.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/src/main/java/twitter/rep/TwitterFollowersReplicatedJoin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/src/main/java/twitter/rs/TwitterFollowersReduceSideJoinStep1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/src/main/java/twitter/rs/TwitterFollowersReduceSideJoinStep2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Joins in MapReduce and Spark/MapReduce/src/main/resources/log4j.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MapReduce/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../MapReduce/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,9 +17,11 @@
     <session id="1591198579">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -43,67 +30,42 @@
           <entry key="class" value="2" />
           <entry key="csv" value="1" />
           <entry key="scala" value="11" />
+          <entry key="txt" value="1" />
           <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="2" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
           <entry key="Scala" value="11" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Makefile" value="117" />
+          <entry key="Makefile" value="132" />
           <entry key="csv" value="1" />
           <entry key="java" value="1" />
-          <entry key="scala" value="2092" />
+          <entry key="scala" value="2127" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="1" />
-          <entry key="PLAIN_TEXT" value="118" />
-          <entry key="Scala" value="2092" />
+          <entry key="PLAIN_TEXT" value="133" />
+          <entry key="Scala" value="2127" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="562">
-              <caret line="52" column="29" selection-end-line="54" selection-end-column="1" />
-              <folding>
-                <element signature="e#17#51#0" expanded="true" />
-                <element signature="e#876#907#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
-              <folding>
-                <element signature="e#25#59#0" expanded="true" />
-                <element signature="e#914#945#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Makefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+            <state relative-caret-position="120">
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="9" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -111,17 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
+            <state relative-caret-position="270">
               <caret line="18" column="12" selection-start-line="18" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/input/Twitter-dataset/edges_test/edges_test.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="3" selection-start-column="3" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -129,8 +82,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
-              <caret line="82" column="20" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
+            <state relative-caret-position="562">
+              <caret line="82" column="20" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
               <folding>
                 <element signature="e#21#55#0" expanded="true" />
               </folding>
@@ -138,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="28" column="21" selection-start-line="28" selection-end-line="29" />
+            <state relative-caret-position="420">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
               <folding>
                 <element signature="e#21#55#0" expanded="true" />
               </folding>
@@ -159,6 +112,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Tri</find>
+      <find>Two</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
@@ -166,13 +125,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/input/Twitter-dataset/edges_test/edges_test.csv" />
-        <option value="$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/scala/twitter/dataset/RSRdd.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala" />
         <option value="$PROJECT_DIR$/Makefile" />
+        <option value="$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala" />
       </list>
     </option>
   </component>
@@ -262,8 +221,8 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538970970360" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539013822205" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -311,29 +270,25 @@
       <option name="presentableId" value="Default" />
       <updated>1538934922088</updated>
       <workItem from="1538934923344" duration="32963000" />
+      <workItem from="1538971962855" duration="388000" />
+      <workItem from="1539012009290" duration="2285000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32963000" />
+    <option name="totallyTimeSpent" value="35636000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Designer" />
-      <window_info id="Image Layers" />
-      <window_info id="UI Designer" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info id="Capture Tool" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24940239" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25338647" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32919255" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32919255" />
-      <window_info anchor="bottom" id="Messages" weight="0.32919255" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32919255" />
@@ -341,16 +296,22 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Bean Validation" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32919255" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32919255" />
+      <window_info anchor="bottom" id="Java Enterprise" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,44 +348,14 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDGroupByKey.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDFoldByKey.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDAggregateByKey.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/package.scala">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDGroupByKey.scala" />
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDFoldByKey.scala" />
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDAggregateByKey.scala" />
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/package.scala" />
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/spark/spark-core_2.11/2.3.1/spark-core_2.11-2.3.1.jar!/org/apache/spark/broadcast/Broadcast.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="82" column="20" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
-          <folding>
-            <element signature="e#21#55#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -435,62 +366,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDReduceByKey.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-160">
-          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/DSET.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="7" selection-end-line="86" selection-end-column="1" />
-          <folding>
-            <element signature="e#17#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="18" column="12" selection-start-line="18" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="28" column="21" selection-start-line="28" selection-end-line="29" />
-          <folding>
-            <element signature="e#21#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
-          <folding>
-            <element signature="e#25#59#0" expanded="true" />
-            <element signature="e#914#945#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="52" column="29" selection-end-line="54" selection-end-column="1" />
-          <folding>
-            <element signature="e#17#51#0" expanded="true" />
-            <element signature="e#876#907#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/RDDReduceByKey.scala" />
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/DSET.scala" />
     <entry file="file://$PROJECT_DIR$/input/Twitter-dataset/edges_test/edges_test.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -498,10 +375,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="52" column="29" selection-end-line="54" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+          <folding>
+            <element signature="e#25#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        <state relative-caret-position="120">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="883" column="23" selection-start-line="883" selection-start-column="17" selection-end-line="883" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="12" selection-start-line="18" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="82" column="20" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
+          <folding>
+            <element signature="e#21#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <element signature="e#21#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
