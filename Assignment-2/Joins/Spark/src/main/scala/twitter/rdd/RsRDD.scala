@@ -15,7 +15,7 @@ object RsRDD {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Twitter Followers Count").setMaster("local[2]")
+    val conf = new SparkConf().setAppName("Twitter Followers Count")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)

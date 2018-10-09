@@ -5,9 +5,9 @@
 hadoop.root=/usr/local/hadoop
 jar.name=twitter-mr-1.0.jar
 jar.path=target/${jar.name}
-job.name=twitter.rep.TwitterFollowersReplicatedJoin
+job.name=twitter.rs.TwitterFollowersReduceSideJoinStep2
 local.input.nodes=input/Twitter-dataset/nodes
-local.input.edges=input/Twitter-dataset/edges
+local.input.edges=input/Twitter-dataset/edges_test
 local.input.two.length.path=input/Twitter-dataset/path2
 local.input.max.node=50000
 local.output=output
@@ -23,9 +23,9 @@ aws.bucket.name=kodefear-ass1
 aws.subnet.id=subnet-fd0f899a
 aws.input.nodes=nodes
 aws.input.edges=edges
-aws.output=output/Assignment/Rep-MAX-50000-C1
+aws.output=output/Assignment/Rep-MAX-50000-C2
 aws.log.dir=log/Assignment-2
-aws.num.nodes=5
+aws.num.nodes=10
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 
@@ -133,7 +133,7 @@ upload-app-aws:
 # Main EMR launch.
 aws: jar
 	aws emr create-cluster \
-		--name "Twitter MR Cluster Rep-MAX-50000-C1" \
+		--name "Twitter MR Cluster Rep-MAX-50000-C2" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop \

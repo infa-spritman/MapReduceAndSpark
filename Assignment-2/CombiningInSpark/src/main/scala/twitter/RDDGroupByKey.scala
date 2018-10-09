@@ -16,7 +16,7 @@ object RDDGroupByKey {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Twitter Followers Count")
+    val conf = new SparkConf().setAppName("Twitter Followers Count RDD-G")
 
 //    conf.set("spark.eventLog.enabled","true")
 

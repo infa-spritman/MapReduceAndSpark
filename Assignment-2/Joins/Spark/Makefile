@@ -4,15 +4,15 @@
 # -----------------------------------------------------------
 spark.root=/usr/local/spark
 hadoop.root=/usr/local/hadoop
-app.name=Twitter Followers Count
+app.name=Twitter Followers Count RepRDD-10000-C1
 jar.name=twitter-spark.jar
 maven.jar.name=twitter-spark-1.0.jar
-job.name=twitter.rdd.RsRDD
+job.name=twitter.rdd.RepRDD
 local.master=local[4]
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges
 local.output=output
-local.max=1000
+local.max=10000
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
 hdfs.input.nodes=nodes
@@ -24,9 +24,9 @@ aws.bucket.name=kodefear-ass1
 aws.subnet.id=subnet-fd0f899a
 aws.input.nodes=nodes
 aws.input.edges=edges
-aws.output=output
-aws.log.dir=log
-aws.num.nodes=1
+aws.output=output/RepRDD-10000-C1
+aws.log.dir=log/RepRDD-10000-C1
+aws.num.nodes=5
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 
@@ -119,12 +119,12 @@ upload-app-aws:
 # Main EMR launch.
 aws: jar upload-app-aws delete-output-aws
 	aws emr create-cluster \
-		--name "Twitter Spark Cluster" \
+		--name "Twitter Spark Cluster RepRDD-10000-C1" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop Name=Spark \
 	    --ec2-attributes SubnetId=${aws.subnet.id} \
-		--steps Type=CUSTOM_JAR,Name="${app.name}",Jar="command-runner.jar",ActionOnFailure=TERMINATE_CLUSTER,Args=["spark-submit","--deploy-mode","cluster","--class","${job.name}","s3://${aws.bucket.name}/${jar.name}","s3://${aws.bucket.name}/input/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}"] \
+		--steps Type=CUSTOM_JAR,Name="${app.name}",Jar="command-runner.jar",ActionOnFailure=TERMINATE_CLUSTER,Args=["spark-submit","--deploy-mode","cluster","--class","${job.name}","s3://${aws.bucket.name}/${jar.name}","s3://${aws.bucket.name}/input/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}","${local.max}"] \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \

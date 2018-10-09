@@ -49,7 +49,7 @@ object RDDFoldByKey {
     val bigRDD = unionRDD.foldByKey(0)(_ + _)
 
     // Coalesce all partitions into one and then saving it to file in desired format.
-    bigRDD.saveAsTextFile(args(2))
+    bigRDD.coalesce(1, true).saveAsTextFile(args(2))
 
     logger.info("Lineage Info:\n" + bigRDD.toDebugString)
   }

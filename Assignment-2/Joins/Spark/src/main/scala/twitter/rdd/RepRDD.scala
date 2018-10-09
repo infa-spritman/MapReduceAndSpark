@@ -17,7 +17,7 @@ object RepRDD {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Twitter Followers Count").setMaster("local[2]")
+    val conf = new SparkConf().setAppName("Twitter Followers Count")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)
@@ -77,7 +77,6 @@ object RepRDD {
       }
     }, preservesPartitioning = true)
 
-    twopath.collect().map(println)
 
     val triangle = twopath.mapPartitions(iter => {
       iter.flatMap {
