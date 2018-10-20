@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c38200a-6396-407e-ab21-fabe60477593" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CombiningInSpark/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../CombiningInSpark/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CombiningInSpark/src/main/scala/twitter/RDDFoldByKey.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../CombiningInSpark/src/main/scala/twitter/RDDFoldByKey.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CombiningInSpark/src/main/scala/twitter/RDDGroupByKey.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../CombiningInSpark/src/main/scala/twitter/RDDGroupByKey.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MapReduce/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../MapReduce/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,11 +17,13 @@
     <session id="1591198579">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.4" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.4" value="3" />
+          <entry key="project.open.time.74" value="1" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -34,7 +31,7 @@
           <entry key="Makefile" value="1" />
           <entry key="class" value="2" />
           <entry key="csv" value="1" />
-          <entry key="scala" value="12" />
+          <entry key="scala" value="13" />
           <entry key="txt" value="1" />
           <entry key="xml" value="2" />
         </counts>
@@ -43,13 +40,13 @@
         <counts>
           <entry key="CLASS" value="2" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Scala" value="12" />
+          <entry key="Scala" value="13" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Makefile" value="229" />
+          <entry key="Makefile" value="254" />
           <entry key="csv" value="1" />
           <entry key="java" value="1" />
           <entry key="scala" value="2146" />
@@ -58,7 +55,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="1" />
-          <entry key="PLAIN_TEXT" value="230" />
+          <entry key="PLAIN_TEXT" value="255" />
           <entry key="Scala" value="2146" />
         </counts>
       </usages-collector>
@@ -69,8 +66,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Makefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+            <state relative-caret-position="170">
+              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+              <folding>
+                <element signature="e#25#59#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+            <state relative-caret-position="510">
+              <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -96,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+            <state relative-caret-position="585">
+              <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
               <folding>
                 <element signature="e#21#55#0" expanded="true" />
               </folding>
@@ -108,7 +117,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
+            <state relative-caret-position="240">
               <caret line="17" column="68" selection-start-line="17" selection-start-column="68" selection-end-line="17" selection-end-column="68" />
               <folding>
                 <element signature="e#21#55#0" expanded="true" />
@@ -132,30 +141,47 @@
       <find>Two</find>
       <find>C1</find>
       <find>50000</find>
-      <find>RepRDD</find>
       <find>15000</find>
       <find>C2</find>
       <find>RsRDD</find>
       <find>RSDataset</find>
       <find>6000</find>
-      <find>RSdataset</find>
       <find>100000</find>
+      <find>10000</find>
+      <find>RSdataset</find>
+      <find>RepRDD</find>
+      <find>700000</find>
+      <find>120000</find>
+      <find>110000</find>
+      <find>150000</find>
     </findStrings>
     <replaceStrings>
       <replace>RsRDD</replace>
       <replace>20000</replace>
-      <replace>C2</replace>
       <replace>4000</replace>
-      <replace>C1</replace>
       <replace>8000</replace>
       <replace>15000</replace>
       <replace>22000</replace>
       <replace>50000</replace>
       <replace>6000</replace>
-      <replace>100000</replace>
+      <replace>60000</replace>
+      <replace>80000</replace>
+      <replace>C2</replace>
       <replace>RSdataset</replace>
       <replace>RepRDD</replace>
       <replace>10000</replace>
+      <replace>100000</replace>
+      <replace>C1</replace>
+      <replace>RepDataset</replace>
+      <replace>200000</replace>
+      <replace>500000</replace>
+      <replace>1000000</replace>
+      <replace>700000</replace>
+      <replace>120000</replace>
+      <replace>110000</replace>
+      <replace>170000</replace>
+      <replace>150000</replace>
+      <replace>c2</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -199,8 +225,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,13 +280,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539013822205" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MapReduce/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -312,18 +338,23 @@
       <workItem from="1538934923344" duration="32963000" />
       <workItem from="1538971962855" duration="388000" />
       <workItem from="1539012009290" duration="2285000" />
-      <workItem from="1539039385605" duration="11101000" />
+      <workItem from="1539039385605" duration="19658000" />
+      <workItem from="1539995700749" duration="637000" />
+      <workItem from="1539999589901" duration="5000" />
+      <workItem from="1539999598900" duration="7000" />
+      <workItem from="1539999618286" duration="5000" />
+      <workItem from="1539999629237" duration="4000" />
+      <workItem from="1540054064454" duration="86000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46737000" />
+    <option name="totallyTimeSpent" value="56038000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="true" />
+    <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25737053" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28525898" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -416,14 +447,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala">
+    <entry file="file://$PROJECT_DIR$/log.txt" />
+    <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+        <state relative-caret-position="170">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log.txt" />
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RepDataset.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <element signature="e#25#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="38" column="40" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -431,37 +479,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/dataset/RSdataset.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="38" column="40" lean-forward="true" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+        <state relative-caret-position="585">
+          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding>
+            <element signature="e#21#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RsRDD.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
+        <state relative-caret-position="240">
           <caret line="17" column="68" selection-start-line="17" selection-start-column="68" selection-end-line="17" selection-end-column="68" />
           <folding>
             <element signature="e#21#55#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/twitter/rdd/RepRDD.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="42" column="9" lean-forward="true" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding>
-            <element signature="e#21#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
         </state>
       </provider>
     </entry>
