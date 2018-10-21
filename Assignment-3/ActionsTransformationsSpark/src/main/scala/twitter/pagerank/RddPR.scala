@@ -1,10 +1,7 @@
 package twitter.rdd
 
 import org.apache.log4j.LogManager
-import org.apache.spark.rdd.RDD
 import org.apache.spark.{HashPartitioner, SparkConf, SparkContext}
-
-import scala.collection.mutable
 
 object RddPR {
 
@@ -75,7 +72,7 @@ object RddPR {
 
     }
 
-    logger.info("Count" + ranks.aggregate(0.0)((x, y) => x + y._2, _ + _))
+    logger.info("Sum" + ranks.aggregate(0.0)((x, y) => x + y._2, _ + _))
     ranks.top(k)(Ordering[(Double, Int)].on(x => (x._2,-x._1))).foreach(println)
 
   }
