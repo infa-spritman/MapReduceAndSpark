@@ -135,8 +135,8 @@ public class PreProcessingAdjacencyList extends Configured implements Tool {
 
     public static void main(final String[] args) {
         // Checking whether 3 arguments are passed or not
-        if (args.length != 4) {
-            throw new Error("Four arguments required:\n<input-node-dir> <input-edges-directory> <output-dir> <MAX-Value>");
+        if (args.length != 3) {
+            throw new Error("Four arguments required:\n<input-node-dir> <input-edges-directory> <output-dir>");
         }
 
         try {

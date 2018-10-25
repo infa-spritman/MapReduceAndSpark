@@ -18,6 +18,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class ShotestPathDriver extends Configured implements Tool {
@@ -34,7 +37,13 @@ public class ShotestPathDriver extends Configured implements Tool {
         final Configuration conf = getConf();
 
         // Setting the source
-        conf.set("sources", "1,8,5");
+        IntStream limit= IntStream.generate(() -> new Random().nextInt(9) + 1).limit(3);
+        String s = limit.collect(
+                StringBuilder::new,
+                (sb, i) -> sb.append( i + ","),
+                StringBuilder::append
+        ).toString();
+        conf.set("sources", s.substring(0, s.length() -1));
         //
 
         int iterationCounter = 1;

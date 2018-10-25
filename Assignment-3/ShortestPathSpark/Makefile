@@ -1,17 +1,19 @@
-# Makefile for Hadoop MapReduce Twitter Followers project.
+# Makefile for Spark Twitter Followers project.
 
 # Customize these paths for your environment.
 # -----------------------------------------------------------
+spark.root=/usr/local/spark
 hadoop.root=/usr/local/hadoop
-jar.name=twitter-mr-1.0.jar
-jar.path=target/${jar.name}
-job.name=twitter.ShotestPathDriver
-local.input.adjList=input/Twitter-dataset/adjList
-local.input.nodes=input/Twitter-dataset/nodes_test
+app.name=Twitter Followers Count RepDataset-150000-c2
+jar.name=twitter-spark.jar
+maven.jar.name=twitter-spark-1.0.jar
+job.name=twitter.shortestpath.RddSD
+local.master=local[4]
+local.input.adj=input/Twitter-dataset/adjList
+local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges_test
-local.input.two.length.path=input/Twitter-dataset/path2
-local.input.max.node=10
 local.output=output
+local.max=150000
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
 hdfs.input.nodes=nodes
@@ -19,13 +21,12 @@ hdfs.input.edges=edges
 hdfs.output=output
 # AWS EMR Execution
 aws.emr.release=emr-5.17.0
-aws.region=us-east-1
 aws.bucket.name=kodefear-ass1
 aws.subnet.id=subnet-fd0f899a
-aws.input.nodes=output/Assignment/RS1-MAX-50000-C1
+aws.input.nodes=nodes
 aws.input.edges=edges
-aws.output=output/Assignment/RS2-MAX-50000-C2
-aws.log.dir=log/Assignment-2
+aws.output=output/RepDataset-150000-c2
+aws.log.dir=log/RepDataset-150000-c2
 aws.num.nodes=10
 aws.instance.type=m4.large
 # -----------------------------------------------------------
@@ -33,30 +34,15 @@ aws.instance.type=m4.large
 # Compiles code and builds jar (with dependencies).
 jar:
 	mvn clean package
+	cp target/${maven.jar.name} ${jar.name}
 
 # Removes local output directory.
 clean-local-output:
 	rm -rf ${local.output}*
 
-clean-local-path2:
-	rm -rf ${local.input.two.length.path}*
-
-copy-local-path2:
-	mkdir ${local.input.two.length.path}
-	cp ${local.output}/* ${local.input.two.length.path}
-
 # Runs standalone
-# Make sure Hadoop  is set up (in /etc/hadoop files) for standalone operation (not pseudo-cluster).
-# https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation
 local: jar clean-local-output
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output}
-
-local-rs-step1: jar clean-local-output clean-local-path2
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output} ${local.input.max.node}
-	make copy-local-path2
-
-local-rs-step2: jar clean-local-output
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.two.length.path} ${local.input.edges} ${local.output} ${local.input.max.node}
+	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} 100
 
 # Start HDFS
 start-hdfs:
@@ -98,7 +84,7 @@ clean-hdfs-output:
 	${hadoop.root}/bin/hdfs dfs -rm -r -f ${hdfs.output}*
 
 # Download output from HDFS to local.
-download-output-hdfs: clean-local-output
+download-output-hdfs:
 	mkdir ${local.output}
 	${hadoop.root}/bin/hdfs dfs -get ${hdfs.output}/* ${local.output}
 
@@ -106,12 +92,12 @@ download-output-hdfs: clean-local-output
 # Make sure Hadoop  is set up (in /etc/hadoop files) for pseudo-clustered operation (not standalone).
 # https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html#Pseudo-Distributed_Operation
 pseudo: jar stop-yarn format-hdfs init-hdfs upload-input-hdfs start-yarn clean-local-output 
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} input/${hdfs.input.nodes} input/${hdfs.input.edges} ${hdfs.output}
+	spark-submit --class ${job.name} --master yarn --deploy-mode cluster ${jar.name} input/${hdfs.input.nodes} input/${hdfs.input.edges} ${local.output}
 	make download-output-hdfs
 
 # Runs pseudo-clustered (quickie).
 pseudoq: jar clean-local-output clean-hdfs-output 
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} input/${hdfs.input.nodes} input/${hdfs.input.edges} ${hdfs.output}
+	spark-submit --class ${job.name} --master yarn --deploy-mode cluster ${jar.name} input/${hdfs.input.nodes} input/${hdfs.input.edges} ${local.output}
 	make download-output-hdfs
 
 # Create S3 bucket.
@@ -129,22 +115,22 @@ delete-output-aws:
 
 # Upload application to S3 bucket.
 upload-app-aws:
-	aws s3 cp ${jar.path} s3://${aws.bucket.name}
+	aws s3 cp ${jar.name} s3://${aws.bucket.name}
 
 # Main EMR launch.
-aws: jar
+aws: jar upload-app-aws delete-output-aws
 	aws emr create-cluster \
-		--name "Twitter MR Cluster RS2-MAX-50000-C2" \
+		--name "Twitter Spark Cluster RepDataset-150000-c2" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
-	    --applications Name=Hadoop \
+	    --applications Name=Hadoop Name=Spark \
 	    --ec2-attributes SubnetId=${aws.subnet.id} \
-	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}","${local.input.max.node}"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
+		--steps Type=CUSTOM_JAR,Name="${app.name}",Jar="command-runner.jar",ActionOnFailure=TERMINATE_CLUSTER,Args=["spark-submit","--deploy-mode","cluster","--class","${job.name}","s3://${aws.bucket.name}/${jar.name}","s3://${aws.bucket.name}/input/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}","${local.max}"] \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \
 		--auto-terminate
-
+		
 # Download output from S3.
 download-output-aws: clean-local-output
 	mkdir ${local.output}
@@ -160,15 +146,16 @@ switch-pseudo:
 
 # Package for release.
 distro:
-	rm -f MR-Demo.tar.gz
-	rm -f MR-Demo.zip
+	rm -f Spark-Demo.tar.gz
+	rm -f Spark-Demo.zip
 	rm -rf build
-	mkdir -p build/deliv/MR-Demo
-	cp -r src build/deliv/MR-Demo
-	cp -r config build/deliv/MR-Demo
-	cp -r input build/deliv/MR-Demo
-	cp pom.xml build/deliv/MR-Demo
-	cp Makefile build/deliv/MR-Demo
-	cp README.txt build/deliv/MR-Demo
-	tar -czf MR-Demo.tar.gz -C build/deliv MR-Demo
-	cd build/deliv && zip -rq ../../MR-Demo.zip MR-Demo
+	mkdir -p build/deliv/Spark-Demo
+	cp -r src build/deliv/Spark-Demo
+	cp -r config build/deliv/Spark-Demo
+	cp -r input build/deliv/Spark-Demo
+	cp pom.xml build/deliv/Spark-Demo
+	cp Makefile build/deliv/Spark-Demo
+	cp README.txt build/deliv/Spark-Demo
+	tar -czf Spark-Demo.tar.gz -C build/deliv Spark-Demo
+	cd build/deliv && zip -rq ../../Spark-Demo.zip Spark-Demo
+	

@@ -7,7 +7,7 @@ hadoop.root=/usr/local/hadoop
 app.name=Twitter Followers Count RepDataset-150000-c2
 jar.name=twitter-spark.jar
 maven.jar.name=twitter-spark-1.0.jar
-job.name=twitter.dataset.RepDataset
+job.name=twitter.pagerank.DatasetPR
 local.master=local[4]
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges
@@ -41,7 +41,7 @@ clean-local-output:
 
 # Runs standalone
 local: jar clean-local-output
-	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} ${local.input.nodes} ${local.input.edges} ${local.output} ${local.max}
+	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} 100
 
 # Start HDFS
 start-hdfs:

@@ -1,4 +1,4 @@
-package twitter.pagerank
+package twitter.shortestpath
 
 import org.apache.log4j.LogManager
 import org.apache.spark.sql.SparkSession

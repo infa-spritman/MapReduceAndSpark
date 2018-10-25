@@ -1,4 +1,4 @@
-package twitter.pagerank
+package twitter.shortestpath
 
 import org.apache.log4j.LogManager
 import org.apache.spark.{HashPartitioner, SparkConf, SparkContext}
@@ -47,11 +47,11 @@ object RddPR {
     // Tell Spark to try and keep this pair RDD around in memory for efficient re-use
     graphRDD.persist()
 
-    // Create the initial PageRanks, using the page count |V|, which can be passed through the context.
+    // Create the initial shortest distants, using the page count |V|, which can be passed through the context.
     // Function mapValues ensures that the same Partitioner is used as for the graph RDD.
     var ranks = graphRDD.mapValues(x => intialPR).union(sc.parallelize(Seq((0, 0.0))))
 
-    // Function extractVertices returns each vertex id m in n’s adjacency list as (m, n’s PageRank / number of n’s outlinks).
+    // Function extractVertices returns each vertex id m in n’s adjacency list as (m, n’s shortest distant / number of n’s outlinks).
 
     for (iterationCount <- 1 to k + 1) {
       // Use Accumulator instead to determine when last iteration is reached
