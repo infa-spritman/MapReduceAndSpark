@@ -45,7 +45,7 @@ object DatasetSD {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Page Rank RDD").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Dataset SD")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)
@@ -61,7 +61,7 @@ object DatasetSD {
 
     val adjcencyFile = sc.textFile(args(0))
 
-    val sources = Seq(5, 8)
+    val sources = Seq(1, 1)
 
     val graphAdj = adjcencyFile.map(line => {
       val spilit = line.split("-")
@@ -93,7 +93,7 @@ object DatasetSD {
 
     var isEqual = false
     var interatonCount = 1
-    while (!isEqual && interatonCount < 11) {
+    while (!isEqual) {
       // Use Accumulator instead to determine when last iteration is reached
       var temp1 = graphAdjDS.joinWith(distances, graphAdjDS("v1") === distances("v1"))
 
@@ -105,19 +105,17 @@ object DatasetSD {
           min("d2").alias("d2")).map(x => Distance(x.getInt(0), x.getInt(1), x.getInt(2)))
 
 
-      isEqual = newDistances.joinWith(distances, newDistances("v1") === distances("v1"))
-        .map(x => x._1.d1 == x._2.d1 && x._1.d2 == x._2.d2).reduce(_ && _)
 
+      isEqual = newDistances.joinWith(distances, newDistances("v1") === distances("v1"))
+        .map(x => x._1.d1 == x._2.d1 && x._1.d2 == x._2.d2).filter(x => !x).count() == 0
 
       distances = newDistances
+
       interatonCount = interatonCount + 1
     }
 
-    distances.collect().foreach(println)
 
-
-
-    logger.info("Diameter: " + interatonCount - 2)
+    logger.info("Diameter: " + interatonCount)
 
 
   }

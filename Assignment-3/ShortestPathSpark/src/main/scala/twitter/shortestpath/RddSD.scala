@@ -37,7 +37,7 @@ object RddSD {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("RddSD scala").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("RddSD scala")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)
@@ -51,7 +51,7 @@ object RddSD {
     // Creating Pair RDD from edges file
     val adjcencyFile = sc.textFile(args(0))
 
-    val sources = Seq(9, 10)
+    val sources = Seq(2, 6)
 
 
     val graphRDD = adjcencyFile.map(line => {
@@ -100,21 +100,21 @@ object RddSD {
     }
 
 
-    logger.info("Diameter: " + interatonCount - 2)
-    val source1Highest = distances.map(x => x._2._1).filter(x => x != Int.MaxValue).reduce(Math.max)
-    val source2Highest = distances.map(x => x._2._2).filter(x => x != Int.MaxValue).reduce(Math.max)
-
-
-    if (source1Highest.isNaN && source2Highest.isNaN)
-      println("Diameter is: " + 0)
-    else if (!source1Highest.isNaN && source2Highest.isNaN)
-      println("Diameter is: " + source1Highest)
-    else if (source1Highest.isNaN && !source2Highest.isNaN)
-      println("Diameter is: " + source2Highest)
-    else if (!source1Highest.isNaN && !source2Highest.isNaN)
-      println("Diameter is: " + Math.max(source1Highest, source2Highest))
-    else
-      println("Diameter is: " + 0)
+    logger.info("Diameter: " + interatonCount)
+//    val source1Highest = distances.map(x => x._2._1).filter(x => x != Int.MaxValue).reduce(Math.max)
+//    val source2Highest = distances.map(x => x._2._2).filter(x => x != Int.MaxValue).reduce(Math.max)
+//
+//
+//    if (source1Highest.isNaN && source2Highest.isNaN)
+//      println("Diameter is: " + 0)
+//    else if (!source1Highest.isNaN && source2Highest.isNaN)
+//      println("Diameter is: " + source1Highest)
+//    else if (source1Highest.isNaN && !source2Highest.isNaN)
+//      println("Diameter is: " + source2Highest)
+//    else if (!source1Highest.isNaN && !source2Highest.isNaN)
+//      println("Diameter is: " + Math.max(source1Highest, source2Highest))
+//    else
+//      println("Diameter is: " + 0)
 
 
   }

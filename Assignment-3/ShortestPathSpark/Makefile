@@ -4,12 +4,12 @@
 # -----------------------------------------------------------
 spark.root=/usr/local/spark
 hadoop.root=/usr/local/hadoop
-app.name=Twitter Followers Count RepDataset-150000-c2
+app.name=DatasetSD
 jar.name=twitter-spark.jar
 maven.jar.name=twitter-spark-1.0.jar
-job.name=twitter.shortestpath.RddSD
+job.name=twitter.shortestpath.DatasetSD
 local.master=local[4]
-local.input.adj=input/Twitter-dataset/adjList
+local.input.adj=input/Twitter-dataset/adjList_test
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges_test
 local.output=output
@@ -25,9 +25,10 @@ aws.bucket.name=kodefear-ass1
 aws.subnet.id=subnet-fd0f899a
 aws.input.nodes=nodes
 aws.input.edges=edges
-aws.output=output/RepDataset-150000-c2
-aws.log.dir=log/RepDataset-150000-c2
-aws.num.nodes=10
+aws.input.adjList=adjList
+aws.output=output/Assignment-3/DatsetSD
+aws.log.dir=log/Assignment-3
+aws.num.nodes=5
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 
@@ -42,7 +43,7 @@ clean-local-output:
 
 # Runs standalone
 local: jar clean-local-output
-	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} 100
+	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} ${local.input.adj} 2
 
 # Start HDFS
 start-hdfs:
@@ -118,14 +119,14 @@ upload-app-aws:
 	aws s3 cp ${jar.name} s3://${aws.bucket.name}
 
 # Main EMR launch.
-aws: jar upload-app-aws delete-output-aws
+aws: jar upload-app-aws
 	aws emr create-cluster \
-		--name "Twitter Spark Cluster RepDataset-150000-c2" \
+		--name "Spark Dataset C1-NEWEqual - K1" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop Name=Spark \
 	    --ec2-attributes SubnetId=${aws.subnet.id} \
-		--steps Type=CUSTOM_JAR,Name="${app.name}",Jar="command-runner.jar",ActionOnFailure=TERMINATE_CLUSTER,Args=["spark-submit","--deploy-mode","cluster","--class","${job.name}","s3://${aws.bucket.name}/${jar.name}","s3://${aws.bucket.name}/input/${aws.input.nodes}","s3://${aws.bucket.name}/input/${aws.input.edges}","s3://${aws.bucket.name}/${aws.output}","${local.max}"] \
+		--steps Type=CUSTOM_JAR,Name="${app.name}",Jar="command-runner.jar",ActionOnFailure=TERMINATE_CLUSTER,Args=["spark-submit","--deploy-mode","cluster","--class","${job.name}","s3://${aws.bucket.name}/${jar.name}","s3://${aws.bucket.name}/input/${aws.input.adjList}","1"] \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \
