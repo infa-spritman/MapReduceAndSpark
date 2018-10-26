@@ -41,7 +41,7 @@ clean-local-output:
 
 # Runs standalone
 local: jar clean-local-output
-	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} 100
+	spark-submit --class ${job.name} --master ${local.master} --name "${app.name}" ${jar.name} 100 ${local.output}
 
 # Start HDFS
 start-hdfs:
@@ -117,7 +117,7 @@ upload-app-aws:
 	aws s3 cp ${jar.name} s3://${aws.bucket.name}
 
 # Main EMR launch.
-aws: jar upload-app-aws delete-output-aws
+aws: jar upload-app-aws
 	aws emr create-cluster \
 		--name "Twitter Spark Cluster RepDataset-150000-c2" \
 		--release-label ${aws.emr.release} \

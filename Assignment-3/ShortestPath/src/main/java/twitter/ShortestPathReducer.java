@@ -46,6 +46,7 @@ public class ShortestPathReducer extends Reducer<IntWritable, JsonWritable, IntW
         Counter updated = context.getCounter(ShotestPathDriver.Convergence.numUpdated);
 
 
+
         for (JsonWritable js : values) {
             JsonObject currentJsonObject = js.getJsonObject();
             boolean isVertex = currentJsonObject.get("isVertex").getAsBoolean();

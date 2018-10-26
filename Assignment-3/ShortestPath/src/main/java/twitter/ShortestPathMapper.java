@@ -1,12 +1,10 @@
 package twitter;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
@@ -29,6 +27,8 @@ public class ShortestPathMapper extends Mapper<Object, Text, IntWritable, JsonWr
         Integer from = Integer.parseInt(row[0]);
         JsonWritable fromVertex = new JsonWritable();
         JsonWritable fromVertexReducer = new JsonWritable();
+        Counter diameter = context.getCounter(ShotestPathDriver.Diameter.path);
+        diameter.setValue(currentCounter);
 
 
         if (currentCounter == 1) {
@@ -45,7 +45,7 @@ public class ShortestPathMapper extends Mapper<Object, Text, IntWritable, JsonWr
             }
             if (listWithoutBrackets.length() != 0) {
                 for (String to : listWithoutBrackets.split(":")) {
-                    adjacencyList.add(to);
+                    adjacencyList.add(new JsonPrimitive(to));
                 }
             }
 

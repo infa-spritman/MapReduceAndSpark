@@ -8,8 +8,6 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Counter;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -17,19 +15,27 @@ import org.apache.hadoop.util.ToolRunner;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
 public class ShotestPathDriver extends Configured implements Tool {
 
     // Declaring the logger for the program
-    private static final Logger logger = LogManager.getLogger(Cardinality.class);
+    private static final Logger logger = LogManager.getLogger(ShotestPathDriver.class);
 
-    enum Convergence {
-        numUpdated
+    public static void main(final String[] args) {
+        // Checking whether 4 arguments are passed or not
+        if (args.length != 3) {
+            throw new Error("Four arguments required:\n<input-adjcency-dir> <output-path> k");
+        }
+
+        try {
+            // Running implementation class
+            ToolRunner.run(new ShotestPathDriver(), args);
+        } catch (final Exception e) {
+            logger.error("MR Job Exception", e);
+        }
     }
 
     @Override
@@ -37,14 +43,15 @@ public class ShotestPathDriver extends Configured implements Tool {
         final Configuration conf = getConf();
 
         // Setting the source
-        IntStream limit= IntStream.generate(() -> new Random().nextInt(9) + 1).limit(3);
+        IntStream limit = IntStream.generate(() -> new Random().nextInt(11316811) + 1).limit(Integer.parseInt(args[2]));
         String s = limit.collect(
                 StringBuilder::new,
-                (sb, i) -> sb.append( i + ","),
+                (sb, i) -> sb.append(i + ","),
                 StringBuilder::append
         ).toString();
-        conf.set("sources", s.substring(0, s.length() -1));
-        //
+        logger.info("K Sources:" + s);
+//        conf.set("sources", s.substring(0, s.length() - 1));
+        conf.set("sources", "1");
 
         int iterationCounter = 1;
         long currentUpdatedNodes = 1;
@@ -90,25 +97,21 @@ public class ShotestPathDriver extends Configured implements Tool {
             Counter currentUpdatedCount = job.getCounters().findCounter(Convergence.numUpdated);
 
             currentUpdatedNodes = currentUpdatedCount.getValue();
-            if (iterationCounter > 1 && fileSystem.exists(new Path(inputPath))) {
-                fileSystem.delete(new Path(inputPath), true);
-            }
+//            if (iterationCounter > 1 && fileSystem.exists(new Path(inputPath))) {
+//                fileSystem.delete(new Path(inputPath), true);
+//            }
+            logger.info("Diameter: " + iterationCounter);
+
             iterationCounter += 1;
         }
         return completed;
     }
 
-    public static void main(final String[] args) {
-        // Checking whether 4 arguments are passed or not
-        if (args.length != 2) {
-            throw new Error("Four arguments required:\n<input-adjcency-dir> <output-path>");
-        }
+    enum Convergence {
+        numUpdated
+    }
 
-        try {
-            // Running implementation class
-            ToolRunner.run(new ShotestPathDriver(), args);
-        } catch (final Exception e) {
-            logger.error("MR Job Exception", e);
-        }
+    enum Diameter {
+        path
     }
 }

@@ -16,13 +16,13 @@ object DatasetPR {
     val logger: org.apache.log4j.Logger = LogManager.getRootLogger
 
     // Checking the length of the arguments
-    if (args.length != 1) {
+    if (args.length != 2) {
       logger.error("Usage:\nPageRank <K-number-of-chains>")
       System.exit(1)
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Page Rank RDD").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Page Rank Dataset Time")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)
@@ -57,8 +57,9 @@ object DatasetPR {
     graphDS.persist()
 
     var ranksDS = graphDS.map(x => Rank(x.v1, intialPR)).union(Seq(Rank(0, 0.0)).toDS())
+    var sumSeq = Seq.empty[Double]
 
-    for (iterationCount <- 1 to k + 1) {
+    for (iterationCount <- 1 to 10) {
       // Use Accumulator instead to determine when last iteration is reached
       var temp = graphDS.joinWith(ranksDS, graphDS("v1") === ranksDS("v1"))
 
@@ -76,11 +77,18 @@ object DatasetPR {
 
       ranksDS = temp2.map(x => if (x.getInt(0) != 0) Rank(x.getInt(0), delta / volume + x.getDouble(1)) else Rank(x.getInt(0), 0.0)).union(tempSeq.toDS())
 
-
+      var summation = ranksDS.agg(sum("pr")).collect()(0).getDouble(0)
+      sumSeq = sumSeq :+ summation
     }
 
-//    logger.info("Count" + ranksDS.agg( sum("pr")).collect()(0).getDouble(0))
-    ranksDS.sort($"pr".desc, $"v1").limit(k).collect().foreach(println)
+    val finalRank = ranksDS.sort($"pr".desc, $"v1").limit(k)
+
+    logger.info("Final Sum\n" + sumSeq.toString())
+
+
+
+    finalRank.write.option("header","true").csv(args(1))
+
 
   }
 }

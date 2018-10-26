@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c38200a-6396-407e-ab21-fabe60477593" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/src/main/scala/twitter/pagerank/DatasetPR.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/src/main/scala/twitter/pagerank/DatasetPR.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/src/main/scala/twitter/pagerank/RddPR.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ActionsTransformationsSpark/src/main/scala/twitter/pagerank/RddPR.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/PreProcessingAdjacencyList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/PreProcessingAdjacencyList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/output-4/._SUCCESS.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/output-4/.part-r-00000.crc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/output-4/_SUCCESS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/output-4/part-r-00000" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/ShortestPathMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/ShortestPathMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/ShortestPathReducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/ShortestPathReducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/ShotestPathDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPath/src/main/java/twitter/ShotestPathDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Assignment-3/ShortestPathSpark/src/main/scala/twitter/shortestpath/DatasetSD.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Assignment-3/ShortestPathSpark/src/main/scala/twitter/shortestpath/DatasetSD.scala" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,15 +28,15 @@
     <session id="1591198579">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.1" value="4" />
+          <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="4" />
           <entry key="project.open.time.58" value="1" />
           <entry key="project.open.time.74" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -228,8 +238,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -351,14 +361,15 @@
       <workItem from="1540323274020" duration="17000" />
       <workItem from="1540328303107" duration="259000" />
       <workItem from="1540412647805" duration="27000" />
+      <workItem from="1540515654600" duration="8000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56341000" />
+    <option name="totallyTimeSpent" value="56349000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29960158" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

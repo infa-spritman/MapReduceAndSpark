@@ -16,7 +16,7 @@ object RddPR {
     }
 
     // Intializing the app and setting the app name
-    val conf = new SparkConf().setAppName("Page Rank RDD").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Page Rank - Time").setMaster("local[*]")
 
     // Intializing Spark Context
     val sc = new SparkContext(conf)
@@ -52,14 +52,15 @@ object RddPR {
     var ranks = graphRDD.mapValues(x => intialPR).union(sc.parallelize(Seq((0, 0.0))))
 
     // Function extractVertices returns each vertex id m in n’s adjacency list as (m, n’s PageRank / number of n’s outlinks).
-
-    for (iterationCount <- 1 to k + 1) {
+    var sumSeq = Seq.empty[Double]
+    for (iterationCount <- 1 to 10) {
       // Use Accumulator instead to determine when last iteration is reached
       var temp = graphRDD.join(ranks).map(x => (x._2._1, x._2._2))
 
       var temp2 = temp.reduceByKey(_ + _)
 
       var delta = temp2.lookup(0)(0)
+
 
       var tempSeq = Seq.empty[(Int, Double)]
 
@@ -68,13 +69,16 @@ object RddPR {
         tempSeq = tempSeq :+ (i, delta / volume)
       }
 
-      ranks = temp2.map(x => if (x._1 != 0) (x._1, delta / volume + x._2) else (x._1, x._2)).union(sc.parallelize(tempSeq))
+      ranks = temp2.map(x => if (x._1 != 0) (x._1, delta / volume + x._2) else (x._1, 0.0)).union(sc.parallelize(tempSeq))
+      val currentSum = ranks.aggregate(0.0)((x, y) => x + y._2, _ + _)
+      sumSeq = sumSeq :+ currentSum
+      logger.info("Sum " + iterationCount + " : " + currentSum)
 
     }
 
-    logger.info("Sum" + ranks.aggregate(0.0)((x, y) => x + y._2, _ + _))
 
-    val finalRank  = ranks.top(k+1)(Ordering[(Double, Int)].on(x => (x._2,-x._1)))
+    val finalRank  = ranks.top(k)(Ordering[(Double, Int)].on(x => (x._2,-x._1)))
+    logger.info("Final Sum\n" + sumSeq.toString())
     sc.parallelize(finalRank).coalesce(1, false).saveAsTextFile(args(1))
 
   }

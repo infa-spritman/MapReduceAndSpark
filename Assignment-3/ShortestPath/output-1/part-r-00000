@@ -1,0 +1,9 @@
+1-{"id":1,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["2"]}
+2-{"id":2,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["4","3"]}
+3-{"id":3,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["1"]}
+4-{"id":4,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["5"]}
+5-{"id":5,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["2"]}
+6-{"id":6,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["7"]}
+7-{"id":7,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":["8"]}
+8-{"id":8,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":[]}
+9-{"id":9,"sourcesDistance":{"7732863":2147483647,"4328971":2147483647},"isVertex":true,"adjacencyList":[]}
