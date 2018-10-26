@@ -133,7 +133,7 @@ aws: jar upload-app-aws
 # Download output from S3.
 download-output-aws: clean-local-output
 	mkdir ${local.output}
-	aws s3 sync s3://${aws.bucket.name}/${aws.output} ${local.output}
+	aws s3 sync s3://${aws.bucket.name}/MR-ACT-C2-NEW-K1/output-9 ${local.output}
 
 # Change to standalone mode.
 switch-standalone:
