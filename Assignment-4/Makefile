@@ -5,12 +5,13 @@
 hadoop.root=/usr/local/hadoop
 jar.name=twitter-mr-1.0.jar
 jar.path=target/${jar.name}
-job.name=twitter.FollowersCount
-local.input.adjList=input/Twitter-dataset/adjList_test
+job.name=twitter.KMeansDriver
+local.input.adjList=input/Twitter-dataset/adjList
 local.input.nodes=input/Twitter-dataset/nodes
 local.input.edges=input/Twitter-dataset/edges
+local.input.followers=input/Twitter-dataset/followers_count
 local.input.two.length.path=input/Twitter-dataset/path2
-local.input.max.k=1
+local.input.k=4
 local.output=output
 # Pseudo-Cluster Execution
 hdfs.user.name=kodefear
@@ -24,10 +25,11 @@ aws.bucket.name=kodefear-ass1
 aws.subnet.id=subnet-fd0f899a
 aws.input.nodes=nodes
 aws.input.edges=edges
+aws.input.followers=followers
 aws.input.adjList=adjList
-aws.output=output
+aws.output=output/Assignment-4
 aws.log.dir=log/Assignment-3
-aws.num.nodes=10
+aws.num.nodes=5
 aws.instance.type=m4.large
 # -----------------------------------------------------------
 
@@ -50,7 +52,7 @@ copy-local-path2:
 # Make sure Hadoop  is set up (in /etc/hadoop files) for standalone operation (not pseudo-cluster).
 # https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation
 local: jar clean-local-output
-	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output}
+	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.followers} ${local.output} ${local.input.k} "GS1"
 
 local-rs-step1: jar clean-local-output clean-local-path2
 	${hadoop.root}/bin/hadoop jar ${jar.path} ${job.name} ${local.input.nodes} ${local.input.edges} ${local.output} ${local.input.max.node}
@@ -121,9 +123,7 @@ make-bucket:
 
 # Upload data to S3 input dir.
 upload-input-aws: make-bucket
-	aws s3 sync ${local.input.nodes} s3://${aws.bucket.name}/input/${aws.input.nodes}
-	aws s3 sync ${local.input.edges} s3://${aws.bucket.name}/input/${aws.input.edges}
-	aws s3 sync ${local.input.adjList} s3://${aws.bucket.name}/input/${aws.input.adjList}
+	aws s3 sync ${local.input.followers} s3://${aws.bucket.name}/input/${aws.input.followers}
 
 # Delete S3 output dir.
 delete-output-aws:
@@ -134,14 +134,14 @@ upload-app-aws:
 	aws s3 cp ${jar.path} s3://${aws.bucket.name}
 
 # Main EMR launch.
-aws: jar upload-app-aws
+aws: jar upload-app-aws upload-input-aws
 	aws emr create-cluster \
-		--name "Shortest Path MR-C2-NEW K:1" \
+		--name "KMeans C1 : GS1" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop \
 	    --ec2-attributes SubnetId=${aws.subnet.id} \
-	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/input/${aws.input.adjList}","s3://${aws.bucket.name}/MR-ACT-C2-NEW-K1/${aws.output}","${local.input.max.k}"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
+	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/input/${aws.input.followers}","s3://${aws.bucket.name}/${aws.output}/C1GS1/output","${local.input.k}","GS1"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \

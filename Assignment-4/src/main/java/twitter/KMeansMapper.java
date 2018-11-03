@@ -3,7 +3,6 @@ package twitter;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -12,13 +11,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
     private final IntWritable centroidId = new IntWritable();
     private final Text textNode = new Text();
 
-    private Map<Integer,Double> centroidList = new LinkedHashMap<>();
+    private Map<Integer, Double> centroidList = new LinkedHashMap<>();
 
     @Override
     public void setup(Context context) throws IOException,
@@ -26,60 +26,45 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         Configuration configuration = context.getConfiguration();
         int currentCounter = configuration.getInt("counter", -1);
         Integer K = configuration.getInt("K", -1);
-        try {
-            URI[] files = context.getCacheFiles();
 
-            if (files == null || files.length == 0) {
-                throw new RuntimeException(
-                        "User information is not set in DistributedCache");
+        if (currentCounter == 1) {
+            String intialCentroids = configuration.get("initial-centroids");
+            String[] split = intialCentroids.split(",");
+            for(int i = 1 ; i <= split.length; i++){
+                centroidList.put(i,Double.parseDouble(split[i-1]));
             }
-            Integer index = 1;
 
+        } else {
+            try {
+                URI[] files = context.getCacheFiles();
 
-            // Read all files in the DistributedCache
-            for (URI p : files) {
-                FileSystem fs = FileSystem.get(p, context.getConfiguration());
+                if (files == null || files.length == 0) {
+                    throw new RuntimeException(
+                            "User information is not set in DistributedCache");
+                }
 
-                BufferedReader rdr = new BufferedReader(
-                        new InputStreamReader(fs.open(new Path(p))));
+                // Read all files in the DistributedCache
+                for (URI p : files) {
+                    FileSystem fs = FileSystem.get(p, context.getConfiguration());
 
-                String line;
-                // For each record in the user file
-                while ((line = rdr.readLine()) != null) {
+                    BufferedReader rdr = new BufferedReader(
+                            new InputStreamReader(fs.open(new Path(p))));
 
-                    String[] split = line.split(",");
+                    String line;
+                    // For each record in the user file
+                    while ((line = rdr.readLine()) != null) {
 
-                    if (split.length != 0) {
-                        // Map the user ID to the record
-                        if(currentCounter == 1){
-                            centroidList.put(index, Double.parseDouble(split[0]));
-                            index++;
+                        String[] split = line.split(",");
+
+                        if (split.length != 0) {
+                            // Map the user ID to the record
+                            centroidList.put(Integer.parseInt(split[0]), Double.parseDouble(split[1]));
                         }
-                        else
-                            centroidList.put(Integer.parseInt(split[0]),Double.parseDouble(split[1]));
                     }
                 }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-
-
-
-
-            if (currentCounter == 1) {
-                Double maxFollowerCount = centroidList.get(centroidList.size());
-                int size = (int) Math.ceil(maxFollowerCount.doubleValue() / K.doubleValue());
-                centroidList.clear();
-
-                for (int i = 0; i < K; i++) {
-
-                    Random random = new Random();
-                    centroidList.put(i+1,random.doubles(Double.valueOf(i * size), Double.valueOf((i + 1) * size)).findFirst().getAsDouble());
-                }
-
-            }
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
     }
@@ -97,7 +82,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         final String[] row = value.toString().split(",");
         Integer userID = Integer.parseInt(row[0]);
         Double followerCount = Double.parseDouble(row[1]);
-        Integer minClusterId = 1;
+        int minClusterId = 1;
 
         Double closestCenter = centroidList.get(minClusterId);
         double minDist = Math.abs(closestCenter - followerCount);
@@ -124,14 +109,12 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         final Text dummyText = new Text();
 
 
-        centroidList.forEach((id,c) -> {
+        centroidList.forEach((id, c) -> {
             centroidcleanup.set(id);
-            dummyText.set("DUM,"+ c);
+            dummyText.set("DUM," + c);
             try {
                 context.write(centroidcleanup, dummyText);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
 

@@ -1,6 +1,5 @@
 package twitter;
 
-import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -27,8 +26,8 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
             // Parsing on comma
             String[] row = t.toString().split(",");
 
-            if(t.toString().contains("DUM"))
-                continue;
+            if(t.toString().contains("DUM")) {
+            }
             else {
                 Integer userId = Integer.parseInt(row[0]);
                 Double followerCount = Double.parseDouble(row[1]);
@@ -46,7 +45,7 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
         } else {
             newCentroidCenter = sum / num_of_dataPointsInCluster;
         }
-        long covertedSSE = (long) ( SSE * 10000.0);
+        long covertedSSE = SSE.longValue();
         context.getCounter(KMeansDriver.Convergence.SSE).increment(covertedSSE);
         centroidsOut.set(newCentroidCenter + "," + SSE);
         context.write(key,centroidsOut);
