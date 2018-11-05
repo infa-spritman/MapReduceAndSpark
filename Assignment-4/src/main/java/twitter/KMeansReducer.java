@@ -29,6 +29,8 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
             if(t.toString().contains("DUM")) {
             }
             else {
+
+                // Finding new centroids and calculating SSE
                 Integer userId = Integer.parseInt(row[0]);
                 Double followerCount = Double.parseDouble(row[1]);
                 Double centroidCoordinate = Double.parseDouble(row[2]);
@@ -38,7 +40,7 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
                 num_of_dataPointsInCluster++;
             }
         }
-
+        // Handling Empty cluster
         if(num_of_dataPointsInCluster == 0.0) {
             Random random = new Random();
             newCentroidCenter = random.doubles(0.0, 564512.0).findFirst().getAsDouble();
@@ -46,6 +48,7 @@ public class KMeansReducer extends Reducer<IntWritable, Text, IntWritable, Text>
             newCentroidCenter = sum / num_of_dataPointsInCluster;
         }
         long covertedSSE = SSE.longValue();
+        // adding SSE to counter
         context.getCounter(KMeansDriver.Convergence.SSE).increment(covertedSSE);
         centroidsOut.set(newCentroidCenter + "," + SSE);
         context.write(key,centroidsOut);

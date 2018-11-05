@@ -58,6 +58,7 @@ public class KMeansDriver extends Configured implements Tool {
         StringBuilder intialCentroidString = new StringBuilder();
         Random random = new Random();
 
+        // Checking for the configuration
         if (config.equals("GS1")) {
 
             for (int i = 0; i < K; i++) {
@@ -82,8 +83,8 @@ public class KMeansDriver extends Configured implements Tool {
 
         conf.set("initial-centroids", intialCentroidString.substring(0, intialCentroidString.length() - 1));
         logger.info("intial-cen" + intialCentroidString.toString());
-
-        while (differenceSSE > 2.0) {
+        // Checking for convergence
+        while (differenceSSE > 2.0 && iterationCounter <=10) {
 
 
             logger.info("Iteration Counter: " + iterationCounter);

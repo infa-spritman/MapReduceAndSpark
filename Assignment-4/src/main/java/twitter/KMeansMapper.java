@@ -26,7 +26,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         Configuration configuration = context.getConfiguration();
         int currentCounter = configuration.getInt("counter", -1);
         Integer K = configuration.getInt("K", -1);
-
+        // Intial centroids from the context
         if (currentCounter == 1) {
             String intialCentroids = configuration.get("initial-centroids");
             String[] split = intialCentroids.split(",");
@@ -57,7 +57,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
                         String[] split = line.split(",");
 
                         if (split.length != 0) {
-                            // Map the user ID to the record
+                            // Map the user cluster ID to the centroid coordinate
                             centroidList.put(Integer.parseInt(split[0]), Double.parseDouble(split[1]));
                         }
                     }
@@ -86,7 +86,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
 
         Double closestCenter = centroidList.get(minClusterId);
         double minDist = Math.abs(closestCenter - followerCount);
-
+        // Finding the closest center for the given data point
         for (int i = 1; i <= K; i++) {
             if (Math.abs(centroidList.get(i) - followerCount) < minDist) {
                 closestCenter = centroidList.get(i);
@@ -108,7 +108,7 @@ public class KMeansMapper extends Mapper<Object, Text, IntWritable, Text> {
         final IntWritable centroidcleanup = new IntWritable();
         final Text dummyText = new Text();
 
-
+        // Add dummy values for handling cases like loss of cluster or duplicates (in next iteration)
         centroidList.forEach((id, c) -> {
             centroidcleanup.set(id);
             dummyText.set("DUM," + c);
