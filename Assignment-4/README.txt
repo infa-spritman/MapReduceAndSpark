@@ -31,6 +31,8 @@ All of the build & execution commands are organized in the Makefile.
 2) Create a folder named "Twitter-dataset" inside given "input" folder.
 3) Create a folder "nodes" inside "Twitter-dataset" folder and copy "nodes.csv" in it.
 4) Create a folder "edges" inside "Twitter-dataset" folder and copy "edges.csv" in it.
+   Create a folder  "followers_count" inside "Twitter-dataset" folder and run Followers count with nodes and edges
+   input to get the followers count data.
 5) Open command prompt.
 6) Navigate to directory where project files unzipped.
 7) Edit the Makefile to customize the environment at the top.
