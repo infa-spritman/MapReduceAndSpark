@@ -81,6 +81,7 @@ public class KMeansDriver extends Configured implements Tool {
         }
 
         conf.set("initial-centroids", intialCentroidString.substring(0, intialCentroidString.length() - 1));
+        logger.info("intial-cen" + intialCentroidString.toString());
 
         while (differenceSSE > 2.0) {
 

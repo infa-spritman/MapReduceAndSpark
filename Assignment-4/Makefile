@@ -28,7 +28,7 @@ aws.input.edges=edges
 aws.input.followers=followers
 aws.input.adjList=adjList
 aws.output=output/Assignment-4
-aws.log.dir=log/Assignment-3
+aws.log.dir=log/Assignment-4
 aws.num.nodes=5
 aws.instance.type=m4.large
 # -----------------------------------------------------------
@@ -136,12 +136,12 @@ upload-app-aws:
 # Main EMR launch.
 aws: jar upload-app-aws upload-input-aws
 	aws emr create-cluster \
-		--name "KMeans C1 : GS1" \
+		--name "KMeans C1 : BS : 1" \
 		--release-label ${aws.emr.release} \
 		--instance-groups '[{"InstanceCount":${aws.num.nodes},"InstanceGroupType":"CORE","InstanceType":"${aws.instance.type}"},{"InstanceCount":1,"InstanceGroupType":"MASTER","InstanceType":"${aws.instance.type}"}]' \
 	    --applications Name=Hadoop \
 	    --ec2-attributes SubnetId=${aws.subnet.id} \
-	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/input/${aws.input.followers}","s3://${aws.bucket.name}/${aws.output}/C1GS1/output","${local.input.k}","GS1"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
+	    --steps '[{"Args":["${job.name}","s3://${aws.bucket.name}/input/${aws.input.followers}","s3://${aws.bucket.name}/${aws.output}/C1BSIt1/output","${local.input.k}","BS"],"Type":"CUSTOM_JAR","Jar":"s3://${aws.bucket.name}/${jar.name}","ActionOnFailure":"TERMINATE_CLUSTER","Name":"Custom JAR"}]' \
 		--log-uri s3://${aws.bucket.name}/${aws.log.dir} \
 		--use-default-roles \
 		--enable-debugging \

@@ -7,6 +7,7 @@ import java.util.List;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
+import org.knowm.xchart.XYSeries;
 import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.Styler.LegendPosition;
 
@@ -33,7 +34,7 @@ public class FollwersNumvsUsersGraph implements ExampleChart<XYChart> {
     public XYChart getChart() {
 
         // generates Log data
-        final List<Integer> yData = new ArrayList<Integer>();
+        final List<Double> yData = new ArrayList<Double>();
         final List<Double> xData = new ArrayList<Double>();
 //        for (int i = -3; i <= 3; i++) {
 //            xData.add(i);
@@ -44,11 +45,18 @@ public class FollwersNumvsUsersGraph implements ExampleChart<XYChart> {
             File inputF = new File("/home/kodefear/Desktop/MR-2/Assignment-4/input/Twitter-dataset/graphCsv/graph.csv");
             InputStream inputFS = new FileInputStream(inputF);
             BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
+            final int index = 1;
             br.lines().forEach( line -> {
                 final String[] row = line.split(",");
 
-                xData.add(Double.parseDouble(row[0]));
-                yData.add(Integer.parseInt(row[1]));
+                final double v = Double.parseDouble(row[0]);
+
+                if(v == 0.0)
+                    xData.add(Double.parseDouble(row[0]));
+                else
+                    xData.add(Math.log(Double.parseDouble(row[0]) + 1.0));
+
+                yData.add(Math.log(Integer.parseInt(row[1])));
 
 
             });
@@ -61,8 +69,8 @@ public class FollwersNumvsUsersGraph implements ExampleChart<XYChart> {
         // Create Chart
         XYChart chart =
                 new XYChartBuilder()
-                        .width(800)
-                        .height(600)
+                        .width(1200)
+                        .height(800)
                         .title("Distribution of Followers")
                         .xAxisTitle("Followers Count")
                         .yAxisTitle("Number Of Users")
@@ -70,11 +78,14 @@ public class FollwersNumvsUsersGraph implements ExampleChart<XYChart> {
                         .build();
 
         // Customize Chart
+        chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
         chart.getStyler().setChartTitleVisible(true);
         chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
         chart.getStyler().setXAxisLabelRotation(45);
-        chart.getStyler().setYAxisLogarithmic(true);
-        chart.getStyler().setXAxisMax(2000.0);
+//        chart.getStyler().setXAxisMax(2000.0);
+//        chart.getStyler().setYAxisLogarithmic(true);
+//        chart.getStyler().setAxisTickPadding(100);
+//        chart.getStyler().setXAxisLogarithmic(true);
 
         // chart.getStyler().setXAxisLabelRotation(0);
 
